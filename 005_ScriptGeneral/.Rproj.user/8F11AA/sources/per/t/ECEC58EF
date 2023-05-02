@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1613649613786.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3230874755",
+    "id" : "ECEC58EF",
+    "lastKnownWriteTime" : 1613681301,
+    "last_content_update" : 1613681301658,
+    "path" : "~/Wait in Vain/2020/002_TRABAJOS/001_Siben/001_2020/001_1raVersion/005_ScriptGeneral/006_LoadArchivosRef.R",
+    "project_path" : "006_LoadArchivosRef.R",
+    "properties" : {
+        "cursorPosition" : "36,2",
+        "scrollLine" : "24",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 8,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

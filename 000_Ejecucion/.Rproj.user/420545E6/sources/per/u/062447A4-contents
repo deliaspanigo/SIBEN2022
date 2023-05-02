@@ -1,0 +1,8 @@
+aver <- '../015_EstadisticasSIBEN/V007 - Estadisticas SIBEN - Wed Apr 19 16_20_23 2023/002_Republica_Dominicana/001_Menores 1500/002_Graficos/001_Graficos - RepublicaDominicana - Menores 1500.xlsx'
+
+aver2 <- '../015_EstadisticasSIBEN/V007 - Estadisticas SIBEN - Wed Apr 19 16_20_23 2023/002_Republica_Dominicana/001_Menores 1500/002_Graficos/'
+
+list.files(aver2)
+
+
+length(strsplit(aver2, "")[[1]])

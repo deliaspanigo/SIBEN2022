@@ -1,0 +1,48 @@
+MPP <- function(input_base=NULL, input_decimales= 2, input_impuesto="Numérica", input_talk=FALSE, input_save=FALSE) {
+  
+
+  
+  estos_decimales <- input_decimales
+  
+  VR <- input_base[,1]
+  FACTOR <- as.factor(as.character(input_base[,2]))
+  cantidad_lvls <- length(levels(FACTOR))
+  
+  # Medidas de Posicion Particionadas
+  lista_MPP <- list()
+  
+  
+  for (k in 1:(cantidad_lvls))  lista_MPP[[k]] <- list()
+  
+  # Segun la cantidad de niveles
+  if (cantidad_lvls > 0) {
+    for(j in 1:cantidad_lvls) {
+      
+      dt <- NULL
+      mini <- NULL
+      
+      dt <- FACTOR == levels(FACTOR)[j]
+      mini <- VR[dt]
+      mini <- data.frame(mini)
+      colnames(mini) <- levels(FACTOR)[j]
+      
+      lista_MPP[[j]] <- MP(mini, estos_decimales, "Numérica")[[1]]
+      
+    } # FIn for j
+    
+  } # Fin if cantidad > 0
+  
+  
+  tabla_MPP  <- lista_MPP[[1]]
+  
+  if (cantidad_lvls > 1) {
+    
+    for(n in 2:cantidad_lvls) {
+      tabla_MPP  <- rbind(lista_MPP[[n]], tabla_MPP)
+    } # Fin for n
+  } # Fin if > 0
+ 
+
+  return(tabla_MPP)
+  
+}

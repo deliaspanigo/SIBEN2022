@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1553617537912.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "341485683",
+    "id" : "7CD0A1",
+    "lastKnownWriteTime" : 1553618621,
+    "last_content_update" : 1553618621625,
+    "path" : "~/SHOUSA/2019/001_lib/functions/MPP_MASTER/MPP_001/MPP_001.R",
+    "project_path" : "MPP_001.R",
+    "properties" : {
+        "cursorPosition" : "31,4",
+        "scrollLine" : "27",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

@@ -1,0 +1,92 @@
+
+
+
+# Cargamos herramientas
+# source("../004_Ejecucion/004_Ejecucion General.R")
+
+# # Criterio de Inclusion
+# dt_mini <- mini[,3] <= 750
+# mini <- mini[dt_mini, ]
+
+
+
+
+input_tablas_varias <- DF02(mini[, c(1,2)])[[4]]
+input_colores <- c("blue", "orange", "red", "green", "yellow")
+input_main <- titulo_grafico
+input_fila <- 2
+
+
+tabla_fa <- input_tablas_varias[[1]]
+# tabla_fa <- tabla_fa[,-ncol(tabla_fa)]
+
+tabla_fr <- input_tablas_varias[[3]]
+# tabla_fr <- tabla_fr[,-ncol(tabla_fr)]
+
+tabla_p <- input_tablas_varias[[4]]
+# tabla_p <- tabla_p[,-ncol(tabla_p)]
+
+# valores_porcentajes <- as.character(as.vector(as.matrix(tabla_p[2,])))
+valores_porcentajes <- tabla_p
+
+for (k in 1:ncol(valores_porcentajes)) valores_porcentajes[,k] <-  as.character(valores_porcentajes[,k])
+for (k in 1:ncol(valores_porcentajes)) valores_porcentajes[,k] <- unlist(strsplit(valores_porcentajes[,k], "%"))
+for (k in 1:ncol(valores_porcentajes)) valores_porcentajes[,k] <-  as.numeric(valores_porcentajes[,k])
+colnames(valores_porcentajes) <- colnames(tabla_fa)
+
+tabla_armada <- tabla_FAP(tabla_p, tabla_fa)
+
+# Nuevo orden a partir de mayor a menor porcentaje
+######################################################################
+# Siben 2020
+# nuevo_orden <- order(valores_porcentajes[1,], decreasing = T)
+
+# Siben 2021 - 17/05/2022
+nuevo_orden <- order(as.vector(as.matrix(valores_porcentajes[1,])), decreasing = T)
+#######################################################################
+
+tabla_fa2 <- tabla_fa[,nuevo_orden]
+tabla_p2 <- tabla_p[,nuevo_orden]
+tabla_armada2 <- tabla_armada[,nuevo_orden]
+
+tabla_salida <- list(tabla_fa2, tabla_p2, tabla_armada2)
+names(tabla_salida) <- c("Tabla de Frecuencias Absolutas", "Tabla de Porcentajes", "Tabla Combinada")
+
+input_colores <- c("red", "blue")
+at_mod <- c(0, 20, 40, 60, 80, 100)
+lab_mod <- paste0(at_mod, "%")
+dimensiones_y <- c(0,max(at_mod))
+dimensiones_x <- NULL
+
+valores_porcentajes2 <- as.matrix(valores_porcentajes[c(1,2),])
+
+mi_grafico <- '
+valores_x <- barplot(valores_porcentajes2, col=input_colores, beside = T, 
+ylim=dimensiones_y, ylab="Porcentaje",
+main = input_main, las=2, axes = F)
+
+axis(2, las = 2, at = at_mod, labels = lab_mod, "%")
+
+# text(valores_x, -3.7, srt = 60, adj= 1, xpd = TRUE, labels = names(valores_porcentajes) , cex=1.2)
+
+
+# text(valores_x, valores_porcentajes2 + 5, inscriptos)
+
+
+'
+
+
+mi_grafico2 <- '
+
+plot(c(0,0), col = "white", xlim = dimensiones_x, ylim=dimensiones_y, axes=F,
+xlab="", ylab="", main=titulo_grafico)
+legend("topright", legend = rownames(valores_porcentajes2), fill = input_colores)
+
+'
+
+
+
+# eval(parse(text= mi_grafico2))
+
+# cat("  Fin Gráfico ",  este_grafico, " - Parte ", esta_minibase, "\n", sep="")
+

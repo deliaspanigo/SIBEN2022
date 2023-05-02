@@ -1,0 +1,26 @@
+
+# library(writexl)
+library(xlsx)
+# write_xlsx(df,'filename.xlsx')
+
+tabla_para_guardar <- tabla_salida[[1]]
+tabla_para_guardar
+
+df <- tabla_para_guardar
+df <- as.data.frame(df)
+
+# Encoding(tabla_para_guardar) <- "UTF-8"
+
+nombre_archivo_excel <- paste0("001_Doc - Excel - Tablas - ", modificacion01, " - ", modificacion02, ".xlsx")
+nombre_hoja <- paste0("Tabla", 10)
+
+
+
+
+
+direccion_save_excel <- paste0("C:/Users/Usuario/Desktop/PRUEBA/", nombre_archivo_excel)
+#saveWorkbook(wb_tablas, direccion_save)
+xlsx::write.xlsx(df,direccion_save_excel,row.names = TRUE)
+
+
+

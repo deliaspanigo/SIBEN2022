@@ -1,0 +1,63 @@
+
+
+
+# Cargamos herramientas
+# source("../004_Ejecucion/004_Ejecucion General.R")
+
+
+
+input_tablas_varias <- DF02(mini[, c(1,2)])[[4]]
+input_colores <- c("blue", "orange", "red", "green", "yellow")
+input_main <- titulo_grafico
+input_fila <- 2
+
+
+tabla_fa <- input_tablas_varias[[1]]
+#tabla_fa <- tabla_fa[,-ncol(tabla_fa)]
+
+tabla_fr <- input_tablas_varias[[3]]
+#tabla_fr <- tabla_fr[,-ncol(tabla_fr)]
+
+tabla_p <- input_tablas_varias[[4]]
+#tabla_p <- tabla_p[,-ncol(tabla_p)]
+
+tabla_armada <- tabla_FAP(tabla_p, tabla_fa)
+
+valores_porcentajes <- as.character(as.vector(as.matrix(tabla_p[2,])))
+for (k in 1:length(valores_porcentajes)) valores_porcentajes[k] <- strsplit(valores_porcentajes[k], "%")[[1]]
+valores_porcentajes <- as.numeric(valores_porcentajes)
+names(valores_porcentajes) <- colnames(tabla_fa)
+
+inscriptos <- as.vector(as.matrix(tabla_armada[input_fila,]))
+
+
+tabla_salida <- list(tabla_fa, tabla_p, tabla_armada)
+names(tabla_salida) <- c("Tabla de Frecuencias Absolutas", "Tabla de Porcentajes por Columna", "Tabla Combinada")
+
+at_mod <- c(0, 20, 40, 60, 80, 100)
+lab_mod <- paste0(at_mod, "%")
+
+nuevo_orden <- order(valores_porcentajes, decreasing = T)
+valores_porcentajes <- valores_porcentajes[nuevo_orden]
+inscriptos <- inscriptos[nuevo_orden]
+
+mi_grafico <- '
+valores_x <- barplot(valores_porcentajes, col="red", 
+                     ylim=c(0,max(at_mod)), ylab="Porcentaje",
+                     main = input_main, 
+                     names.arg="", las=2, axes = F)
+
+axis(2, las = 2, at = at_mod, labels = lab_mod)
+
+text(valores_x, -3.7, srt = 60, adj= 1, xpd = TRUE, labels = names(valores_porcentajes) , cex=1.2)
+
+
+text(valores_x, valores_porcentajes + 5, inscriptos)
+'
+
+
+
+# eval(parse(text= mi_grafico))
+
+# cat("  Fin Gráfico ",  este_grafico, " - Parte ", esta_minibase, "\n", sep="")
+

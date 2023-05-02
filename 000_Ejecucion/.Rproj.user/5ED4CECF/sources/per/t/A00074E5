@@ -1,0 +1,26 @@
+{
+    "id": "A00074E5",
+    "path": "C:/DesarrollosGitHub/SIBEN2021/000_Ejecucion/000_EjecucionGeneral.R",
+    "project_path": "000_EjecucionGeneral.R",
+    "type": "r_source",
+    "hash": "3749958915",
+    "contents": "",
+    "dirty": false,
+    "created": 1653530760456.0,
+    "source_on_save": false,
+    "relative_order": 1,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "45,0",
+        "scrollLine": "22"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1655477084,
+    "encoding": "ISO8859-1",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1655477084,
+    "read_only": false,
+    "read_only_alternatives": []
+}

@@ -1,0 +1,25 @@
+
+# Minibases de tablas
+minibase_graficos <- list()
+
+# Cada Tabla
+graficos_internos <- list()
+graficos_externos <- list()
+
+
+# Naval de Tablas
+naval_graficos <- list()
+
+
+# Armado de cada tabla
+arm_grafico <- list()
+
+# Titulo de cada Tabla
+main_graficos <- list()
+
+# Notas de la tabla
+notas_graficos <- list()
+
+tablas_graficos <- list()
+
+

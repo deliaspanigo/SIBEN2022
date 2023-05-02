@@ -1,0 +1,93 @@
+
+
+
+# Cargamos herramientas
+# source("../004_Ejecucion/004_Ejecucion General.R")
+
+
+
+
+
+
+# Columnas implicadas de IPT
+col_ipt1 <- c("W", "AH", "AS", "BD", "BO", "BZ", "CK", "CV", "DG", "DR")
+col_ipt2 <- "FC"
+col_ipt3 <- "E"
+
+
+# Base de COnfirmaciones
+v1 <- BASE_MOD_IPT[let2num(col_ipt1)]
+dias_internacion <- BASE_MOD_ORIGINAL[let2num(col_ipt2)]
+unidad <- BASE_MOD_RECAT[let2num(col_ipt3)]
+
+
+# Conversion
+for(k in 1:ncol(v1)) v1[,k] <- as.character(v1[,k])
+for (k in 1:nrow(v1)) {
+  for (y in 1:ncol(v1)) {
+    
+    if (is.na(v1[k, y])) v1[k, y] <- 0 
+    if (v1[k, y] == "Confirmada") v1[k, y] <- 1 else v1[k, y] <- 0 
+    
+  }
+}
+for(k in 1:ncol(v1)) v1[,k] <- as.numeric(as.character(v1[,k]))
+
+# Cantidad de confirmaciones por paciente
+confirmaciones_paciente <- rowSums(v1)
+
+
+
+# Creamos minibase
+mini <- cbind(confirmaciones_paciente, unidad, dias_internacion)
+
+
+mini2 <- mini 
+# Por cada Unidad habra una media
+estas_unidades <- names(table(unidad))
+score_unidad <- rep(NA, length(estas_unidades))
+
+
+for (k in 1:length(score_unidad)) {
+  
+  dt_filtro2 <- mini2$recat_codigo_unidad == estas_unidades[k]
+  
+  mini3 <- mini2[dt_filtro2, ]
+  
+  suma1 <- sum(na.omit(mini3$confirmaciones_paciente)) # Suma de Confirmaciones
+  suma2 <- sum(na.omit(mini3$Egreso_Dias.Internac))
+  
+  resultado <- (suma1/suma2)*1000
+  
+  resultado2 <- round2(resultado, 0)
+  
+  score_unidad[k] <- resultado2
+  
+  
+}
+
+names(score_unidad) <- estas_unidades
+
+nuevo_orden <- order(score_unidad, decreasing = T)
+score_unidad <- score_unidad[nuevo_orden]
+
+
+score_unidad2 <- score_unidad
+dim(score_unidad2) <- c(length(score_unidad2), 1)
+rownames(score_unidad2) <- estas_unidades[nuevo_orden]
+
+
+tabla_salida <- list(score_unidad2)
+names(tabla_salida) <- "Tabla de Índice"
+
+
+  
+mi_grafico <- '
+valores_x <- barplot(score_unidad, col="red", las=2, ylim=c(0, 100), main=titulo_grafico,
+                     xlab="Código Unidades", ylab="Índice")
+
+text(valores_x, score_unidad + 5, score_unidad)
+'
+
+#  eval(parse(text= mi_grafico))
+

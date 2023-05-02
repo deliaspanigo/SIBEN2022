@@ -1,0 +1,5 @@
+La base de datos enviada por Marcelo el 09-04-2023 es un solo archivo que tiene appendado lo que sería
+la base Original e IPT.
+No agregó la base de IC a la selección de pacientes, entonces que incompleta la información para ver usada a un futuro.
+Por eso agrego al archivo IC el ID de los pacientes para que halla columnas y dejo el nombre de las columnas del archivo IC
+como lo tenía en 2021 para que lo tome bien la automatización. 

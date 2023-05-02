@@ -1,0 +1,43 @@
+recat_id_pac;recat_anio;recat_nombre_hospital;recat_pais;recat_codigo_unidad;recat_grupo;recat_cat_peso;recat_dias_egreso_internacion;recat_apgar1;recat_apgar5;recat_apgar10;recat_rangos_eg_inicial;recat_fiO2;recat_eco2;recat_eg_final;recat_sexo;recat_fenton_peso_nacim;recat_fenton_peso_egreso;recat_fenton_PC_nacim;recat_fenton_PC_egreso;recat_Z_peso_nacim;recat_Z_peso_egreso;recat_Z_PC_nacim;recat_Z_PC_egreso;recat_fusion_retino;recat_edad3;recat_fusion_arm_cpap;recat_fusion_ds_dp;recat_eco3;recat_dias_int_fallec;recat_control_mas_tres;recat_fusion_retino2;recat_criterio_seleccion1;recat_criterio_seleccion2;recat_criterio_seleccion3;recat_criterio_seleccion4;recat_criterio_seleccion5;recat_criterio_seleccion6;recat_criterio_seleccion7;recat_rangos_eg_final;recat_criterio_inclusion8;recat_criterio_inclusion9;recat_dap;recat_fusion_retino3;recat_dbp;recat_gravedad_dbp;recat_criterio_inclusion10;recat_fusion_grado_hemo;recat_criterio_inclusion11;recat_criterio_inclusion12;recat_atb_cultivos_sp;recat_atb_dias_general;recat_st_cultivo_general;recat_atb_cultivos_st;recat_criterio_inclusion13
+NO;NO;NO;NO;NO;SI;SI;SI;SI;SI;SI;SI;SI;SI;NO;SI;SI;SI;SI;SI;NO;NO;NO;NO;SI;SI;SI;SI;SI;SI;SI;SI;SI;SI;SI;SI;SI;SI;SI;SI;SI;SI;NO;SI;SI;SI;SI;SI;SI;SI;SI;SI;SI;SI;SI
+recat_id_pac;recat_anio;recat_nombre_hospital;recat_pais;recat_codigo_unidad;recat_grupo;recat_cat_peso;recat_dias_egreso_internacion;recat_apgar1;recat_apgar5;recat_apgar10;recat_rangos_eg_inicial;recat_fiO2;recat_eco2;recat_eg_final;recat_sexo;recat_fenton_peso_nacim;recat_fenton_peso_egreso;recat_fenton_PC_nacim;recat_fenton_PC_egreso;recat_Z_peso_nacim;recat_Z_peso_egreso;recat_Z_PC_nacim;recat_Z_PC_egreso;recat_fusion_retino;recat_edad3;recat_fusion_arm_cpap;recat_fusion_ds_dp;recat_eco3;recat_dias_int_fallec;recat_control_mas_tres;fusion_retino2;recat_criterio_seleccion1;recat_criterio_seleccion2;recat_criterio_seleccion3;recat_criterio_seleccion4;recat_criterio_seleccion5;recat_criterio_seleccion6;recat_criterio_seleccion7;recat_rangos_eg_final;recat_criterio_inclusion8;recat_criterio_inclusion9;recat_dap;recat_fusion_retino3;recat_dbp;recat_gravedad_dbp;recat_criterio_inclusion10;recat_fusion_grado_hemo;recat_criterio_inclusion11;recat_criterio_inclusion12;recat_atb_cultivos_sp;recat_atb_dias_general;recat_st_cultivo_general;recat_atb_cultivos_st;recat_criterio_inclusion13
+1;;;;;G1;Hasta 500;0 a 1;0 a 3;0 a 3;0 a 3;22 a 24 sem;21%;Sin Ecografía;;Femenino;GEG;GEG;GEG;GEG;;;;;No;20;Sin Apoyo;DP NO;No;Grupo 1;No;Sin ROP;No;No;No;No;No;Menor 1500;Fallece Nacer;22 a 24 sem;Si;Si;;Sin ROP;Sin Displasia;Sin Displasia;Si;HIC GI y GII;Si;Si;No;1 a 3;Positivo;Si;Si
+2;;;;;G2;501 a 750;2 a 3;4 a 6;4 a 6;4 a 6;25 a 27 sem;22% a 30%;Normal;;Masculino;AEG;AEG;AEG;AEG;;;;;Grado I;21;ARM;DP SI + DS NO;Si;Grupo 2;Si;ROP I;Si;Si;Si;Si;Si;Mayor 1500;Fallecido;25 a 27 sem;No;No;;Grado I o II;Con Displasia;DBP Leve;No;HIC GIII, GIV y LMPV;No;No;Si;>3;Negativo;No;No
+3;;;;;;751 a 1000;4 a 7;7 a 10;7 a 10;7 a 10;28 a 30 sem;31% a 39%;LMPV;;;PEG;PEG;PEG;PEG;;;;;Grado II;22;CPAP;DP SI + DS SI;;Grupo 3;;ROP II;;;;;;;Vivo;28 a 30 sem;;;;Grado III o IV;;DBP Moderada;;Normal;;;;;;;
+4;;;;;;1001 a 1250;8 a 14;;;;31 a 33 sem;40% a 59%;HIC GI;;;PEG SEVERO;PEG SEVERO;PEG SEVERO;PEG SEVERO;;;;;Grado III;23;ARM+CPAP;;;Grupo 4;;ROP III;;;;;;;;31 a 33 sem;;;;;;DBP Grave;;;;;;;;;
+5;;;;;;1251 a 1500;15 a 30;;;;34 a 36 sem;60% a 89%;HIC GII;;;;;;;;;;;Grado IV;24;;;;;;ROP IV;;;;;;;;34 a 36 sem;;;;;;;;;;;;;;;
+6;;;;;;1501 a 1750;Mayor a 30;;;;37 a 38 sem;90% a 99%;HIC GIII;;;;;;;;;;;;25;;;;;;;;;;;;;;37 a 38 sem;;;;;;;;;;;;;;;
+7;;;;;;1751 a 2000;;;;;39 a 43 sem;100%;HIC GIV;;;;;;;;;;;;26;;;;;;;;;;;;;;39 a 43 sem;;;;;;;;;;;;;;;
+8;;;;;;2001 a 2500;;;;;;;;;;;;;;;;;;;27;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+9;;;;;;Mayores a 2500;;;;;;;;;;;;;;;;;;;28;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+10;;;;;;;;;;;;;;;;;;;;;;;;;29;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+11;;;;;;;;;;;;;;;;;;;;;;;;;30;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+12;;;;;;;;;;;;;;;;;;;;;;;;;31;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+13;;;;;;;;;;;;;;;;;;;;;;;;;32;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+14;;;;;;;;;;;;;;;;;;;;;;;;;33;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+15;;;;;;;;;;;;;;;;;;;;;;;;;34;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+16;;;;;;;;;;;;;;;;;;;;;;;;;>34;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+17;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+18;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+19;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+20;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+21;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+22;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+23;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+24;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+25;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+26;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+27;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+28;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+29;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+30;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+31;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+32;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+33;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+34;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+35;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+36;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+37;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+38;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+39;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+40;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

@@ -1,0 +1,451 @@
+
+# La pagina de donde lo saque...
+# http://www.sthda.com/english/wiki/r-xlsx-package-a-quick-start-guide-to-manipulate-excel-files-in-r
+
+# Librerias
+library(xlsx)
+library(ggplot2)
+
+
+xlsx.addTitle<-function(sheet, rowIndex, title, titleStyle){
+  rows <-createRow(sheet,rowIndex=rowIndex)
+  sheetTitle <-createCell(rows, colIndex=1)
+  setCellValue(sheetTitle[[1,1]], title)
+  setCellStyle(sheetTitle[[1,1]], titleStyle)
+}
+
+xlsx.addText <-function(sheet, rowIndex, colIndex, text){
+  rows <-createRow(sheet, rowIndex = rowIndex)
+  sheetTitle <- xlsx::createCell(rows, colIndex = colIndex)
+  xlsx::setCellValue(sheetTitle[[1,1]], text)
+}
+# 
+# # Define some cell styles
+# #++++++++++++++++++++
+# # Title and sub title styles
+# TITLE_STYLE <- CellStyle(wb)+ Font(wb,  heightInPoints=16, 
+#                                    color="blue", isBold=TRUE, underline=1)
+# SUB_TITLE_STYLE <- CellStyle(wb) + 
+#   Font(wb,  heightInPoints=14, 
+#        isItalic=TRUE, isBold=FALSE)
+# # Styles for the data table row/column names
+# TABLE_ROWNAMES_STYLE <- CellStyle(wb) + Font(wb, isBold=TRUE)
+# TABLE_COLNAMES_STYLE <- CellStyle(wb) + Font(wb, isBold=TRUE) +
+#   Alignment(wrapText=TRUE, horizontal="ALIGN_CENTER") +
+#   Border(color="black", position=c("TOP", "BOTTOM"), 
+#          pen=c("BORDER_THIN", "BORDER_THICK")) 
+#######################################################################################
+# Cargamos cada parte del trabajo
+direccion <- mi_mega_directorio
+
+if (1 == 2){
+# Tablas a Excel
+{
+  ###  
+  
+  
+  library(ggplot2)
+  library(openxlsx)
+  
+  
+  # Workbook de Tablas (Creamos el Excel)
+  wb_tablas <- openxlsx::createWorkbook()
+  
+ 
+ 
+  # SIBEN 2021 - 25 de Mayo 2021
+  #########################################################################################################
+  # Para las tablas agrego el detalle del nombre del grupo y subgrupo al cual se estan realizando.
+  modificacion01 <- strsplit(esquirla1, "_")[[1]]
+  modificacion01 <- paste0(modificacion01[2:length(modificacion01)], collapse = "")
+  modificacion02 <- strsplit(esquirla2, "_")[[1]][2]
+  modificacion03 <- paste0(modificacion01, " - ", modificacion02)
+  ###################################################################################################
+  
+  # SIBEN 2021 - 25 de Mayo 2021
+  #########################################################################################################
+  # nombre_archivo <-  paste0("001_Doc - Excel - Tablas - ", modificacion01, " - ", modificacion02)
+  nombre_archivo_excel <- paste0("001_Doc - Excel - Tablas - ", modificacion01, " - ", modificacion02, ".xlsx")
+  nombre_archivo_power <- paste0("001_Doc - Power - Tablas - ", modificacion01, " - ", modificacion02, ".pptx")
+  ##########################################################################################################
+  
+  
+  for (n in 1:length(tablas_internas)) {
+    
+    cat("Excel tablas_internas:  ", n, "\n")
+    
+    nombre_hoja <- paste0("Tabla", n)
+    esta_tabla <- tablas_internas[[n]]
+  
+    # Creamos la Hoja
+    openxlsx::addWorksheet(wb = wb_tablas, sheetName = nombre_hoja)
+    
+    dt_tabla <- ref_tablas[,2] == n
+    este_orden <- as.numeric(as.character(ref_tablas[dt_tabla,2]))
+    esta_tabla_naval <- naval_tablas[[este_orden]]
+   
+    ####
+ #   orden_externo <- ref_tablas$Tabla[n]
+    orden_externo <- ref_tablas$Salida[n]
+    detalle_externo <- paste0("Tabla ", orden_externo, " (Externo)")
+    detalle_externo2 <- paste0("Tabla ", orden_externo)
+    ###
+    
+    este_titulo <- ref_tablas$Titulo[n]
+    # este_titulo <- paste0(nombre_hoja, ": ", este_titulo)
+    este_titulo <- paste0(detalle_externo, ": ", este_titulo)
+    
+    
+ 
+
+    # Numero de tabla
+    fila_inicio00 <- 2
+    columna_inicio00 <- 1
+    openxlsx::writeData(wb_tablas, nombre_hoja, nombre_hoja, startRow = fila_inicio00, 
+                        startCol = columna_inicio00)
+    
+  
+    
+    # Numero de tabla externo
+    fila_inicio01 <- 3
+    columna_inicio01 <- 1
+    openxlsx::writeData(wb_tablas, nombre_hoja, detalle_externo, startRow = fila_inicio01, 
+                        startCol = columna_inicio01)
+    
+    # Naval
+    openxlsx::writeData(wb_tablas, nombre_hoja, esta_tabla_naval, startRow = 3, 
+                        startCol = 16, rowNames = T, colNames = T)
+    
+    
+    # Titulo de la tabla
+    fila_inicio02 <- 6
+    columna_inicio02 <- 3
+    openxlsx::writeData(wb_tablas, nombre_hoja, este_titulo, startRow = fila_inicio02, 
+                        startCol = columna_inicio02)
+
+    
+        
+    # Especificacion de grupo
+    fila_inicio03 <- 1
+    columna_inicio03 <- 3
+    openxlsx::writeData(wb_tablas, nombre_hoja, modificacion01, startRow = fila_inicio03, 
+                        startCol = columna_inicio03)
+    
+    
+    # Especificacion desubgrupo
+    fila_inicio04 <- 1
+    columna_inicio04 <- 4
+    openxlsx::writeData(wb_tablas, nombre_hoja, modificacion02, startRow = fila_inicio04, 
+                        startCol = columna_inicio04)
+    
+    # Colocamos la tabla
+    
+    for (ppp in 1:length(esta_tabla)) {
+    
+    if (ppp == 1) {
+      
+    solo_esta_tabla <- esta_tabla[[ppp]]
+    
+    fila_inicio03 <- 10
+    columna_inicio03 <- 3
+    
+
+    }
+    
+      if (ppp > 1) {
+        
+        solo_esta_tabla <- esta_tabla[[ppp]]
+        
+        fila_inicio03 <- 8 + nrow(esta_tabla[[ppp-1]]) + 4
+
+        
+      }  
+      
+      rotulo <- names(esta_tabla)[ppp]
+      
+      openxlsx::writeData(wb_tablas, nombre_hoja, rotulo, startRow = (fila_inicio03-1), 
+                          startCol = columna_inicio03)
+      
+      openxlsx::writeData(wb_tablas, nombre_hoja, solo_esta_tabla, startRow = fila_inicio03, 
+                          startCol = columna_inicio03, rowNames = T, colNames = T)
+      
+    }
+
+  } # Fin for n
+  
+  
+  # Siben 2020
+  #nombre_archivo <-  "001_Doc - Excel - Tablas.xlsx"
+  
+  
+  
+  direccion_save_excel <- paste0(direccion, "/", nombre_archivo_excel)
+  #saveWorkbook(wb_tablas, direccion_save)
+  openxlsx::saveWorkbook(wb_tablas, direccion_save_excel, overwrite = T)
+  
+  ###
+} # Fin tablas_internas a Excel
+##################################################################
+}
+
+
+# Tablas a Excel
+{
+  ###  
+  
+  library(xlsx)
+  
+  
+  # Workbook de Tablas (Creamos el Excel)
+  wb_tablas <- xlsx::createWorkbook(type="xlsx")
+  
+  
+
+  # SIBEN 2021 - 25 de Mayo 2021
+  #########################################################################################################
+  # Para las tablas agrego el detalle del nombre del grupo y subgrupo al cual se estan realizando.
+  modificacion01 <- strsplit(esquirla1, "_")[[1]]
+  modificacion01 <- paste0(modificacion01[2:length(modificacion01)], collapse = "")
+  modificacion02 <- strsplit(esquirla2, "_")[[1]][2]
+  modificacion03 <- paste0(modificacion01, " - ", modificacion02)
+  ###################################################################################################
+  
+  # SIBEN 2021 - 25 de Mayo 2021
+  #########################################################################################################
+  # nombre_archivo <-  paste0("001_Doc - Excel - Tablas - ", modificacion01, " - ", modificacion02)
+  # nombre_archivo_excel <- paste0("001_Tablas - ", modificacion01, " - ", modificacion02, ".xlsx")
+  # nombre_archivo_power <- paste0("001_Tablas - ", modificacion01, " - ", modificacion02, ".pptx")
+  ##########################################################################################################
+  
+  # SIBEN 2022 - 19 de Abril 2023
+  #########################################################################################################
+  # nombre_archivo <-  paste0("001_Doc - Excel - Tablas - ", modificacion01, " - ", modificacion02)
+  nombre_archivo_excel <- paste0("01_", modificacion01, " - ", modificacion02, ".xlsx")
+  nombre_archivo_power <- paste0("01_", modificacion01, " - ", modificacion02, ".pptx")
+  ##########################################################################################################
+  
+  
+  
+  for (n in 1:length(tablas_internas)) {
+    
+   
+    
+    cat("Excel tablas_internas:  ", n, "\n")
+    
+    nombre_hoja <- paste0("Tabla", n)
+    esta_tabla <- tablas_internas[[n]]
+    
+    # Creamos una hoja en particular
+    sheet <- xlsx::createSheet(wb_tablas, sheetName = nombre_hoja)
+    
+    dt_tabla <- ref_tablas[,2] == n
+    este_orden <- as.numeric(as.character(ref_tablas[dt_tabla,2]))
+    esta_tabla_naval <- naval_tablas[[este_orden]]
+    
+    ####
+    #   orden_externo <- ref_tablas$Tabla[n]
+    orden_externo <- ref_tablas$Salida[n]
+    detalle_externo <- paste0("Tabla ", orden_externo, " (Externo)")
+    detalle_externo2 <- paste0("Tabla ", orden_externo)
+    ###
+    
+    este_titulo <- ref_tablas$Titulo[n]
+    # este_titulo <- paste0(nombre_hoja, ": ", este_titulo)
+    este_titulo <- paste0(detalle_externo, ": ", este_titulo)
+    
+    
+    
+    
+    # Numero de tabla
+    fila_inicio00 <- 2
+    columna_inicio00 <- 1
+    xlsx.addText(sheet = sheet, rowIndex = 1, colIndex = 1, text = nombre_hoja)
+  #########################################################################################
+    
+    
+    
+    # Numero de tabla externo
+    fila_inicio01 <- 3
+    columna_inicio01 <- 1
+    xlsx.addText(sheet = sheet, rowIndex = fila_inicio01, colIndex = columna_inicio01, 
+                 text = detalle_externo)
+    # openxlsx::writeData(wb_tablas, nombre_hoja, detalle_externo, startRow = fila_inicio01, 
+    #                     startCol = columna_inicio01)
+  ###########################################################################################
+    
+  
+    # Titulo de la tabla
+    fila_inicio02 <- 6
+    columna_inicio02 <- 3
+    xlsx.addText(sheet = sheet, rowIndex = fila_inicio02, colIndex = columna_inicio02,
+                 text = este_titulo)
+    # openxlsx::writeData(wb_tablas, nombre_hoja, este_titulo, startRow = fila_inicio02, 
+    #                     startCol = columna_inicio02)
+  #############################################################################################  
+    
+    
+    # Especificacion de grupo
+    fila_inicio03 <- 1
+    columna_inicio03 <- 3
+    xlsx.addText(sheet = sheet, rowIndex = fila_inicio03, colIndex = columna_inicio03,
+                 text = modificacion01)
+    # openxlsx::writeData(wb_tablas, nombre_hoja, modificacion01, startRow = fila_inicio03, 
+    #                     startCol = columna_inicio03)
+  ################################################################################################ 
+    
+    # Especificacion desubgrupo
+    fila_inicio04 <- 2
+    columna_inicio04 <- 3
+    xlsx.addText(sheet = sheet, rowIndex = fila_inicio04, colIndex = columna_inicio04,
+                 text = modificacion02)
+    
+  #################################################################################################
+    
+    # Naval
+    xlsx::addDataFrame(esta_tabla_naval, sheet, startRow = 3, startCol = 16,
+                       row.names = FALSE, col.names = TRUE)
+    
+    # openxlsx::writeData(wb_tablas, nombre_hoja, esta_tabla_naval, startRow = 3, 
+    #                     startCol = 16, rowNames = T, colNames = T)
+    ###########################################################################################  
+    
+    # openxlsx::writeData(wb_tablas, nombre_hoja, modificacion02, startRow = fila_inicio04, 
+    #                     startCol = columna_inicio04)
+    
+    # Colocamos la tabla
+    
+    for (ppp in 1:length(esta_tabla)) {
+      
+      if (ppp == 1) {
+        
+        solo_esta_tabla <- esta_tabla[[ppp]]
+        
+        fila_inicio03 <- 10
+        columna_inicio03 <- 3
+        
+        
+      }
+      
+      if (ppp > 1) {
+        
+        solo_esta_tabla <- esta_tabla[[ppp]]
+        
+        fila_inicio03 <- 8 + nrow(esta_tabla[[ppp-1]]) + 4
+        
+        
+      }  
+      
+      rotulo <- names(esta_tabla)[ppp]
+      
+      # openxlsx::writeData(wb_tablas, nombre_hoja, rotulo, startRow = (fila_inicio03-1), 
+      #                     startCol = columna_inicio03)
+      # 
+      # openxlsx::writeData(wb_tablas, nombre_hoja, solo_esta_tabla, startRow = fila_inicio03, 
+      #                     startCol = columna_inicio03, rowNames = T, colNames = T)
+      
+      xlsx::addDataFrame(solo_esta_tabla, sheet, startRow = fila_inicio03, startCol = columna_inicio03,
+                         row.names = TRUE, col.names = TRUE)
+    }
+    
+  } # Fin for n
+  
+  
+  # Siben 2020
+  #nombre_archivo <-  "001_Doc - Excel - Tablas.xlsx"
+  
+  
+  
+  direccion_save_excel <- paste0(direccion, "/", nombre_archivo_excel)
+  #saveWorkbook(wb_tablas, direccion_save)
+  xlsx::saveWorkbook(wb_tablas, direccion_save_excel)
+  
+  ###
+} # Fin tablas_internas a Excel
+##################################################################
+
+
+if (1 == 2) {
+# tablas_internas a Power Point
+{
+###
+  
+  
+  
+  # Opciones de R
+  # options(encoding = "UTF-8")
+  
+  # Librerias
+  
+
+  library(flextable)
+  library(rvg)
+  library(ggplot2)
+  library(officer)
+  library(magrittr)
+  
+  pptx_tablas <- read_pptx()
+  
+  contador_tablas <- 0
+  
+  for (n in 1:length(tablas_internas)) {
+    
+
+        cat("Power tablas_internas: ", n, "\n")
+        
+        nombre_hoja <- paste0("Tabla ", n)
+        esta_tabla <- tablas_internas[[n]]
+        esta_tabla <- as.data.frame(esta_tabla)
+        
+        
+        dt_tabla <- ref_tablas[,2] == n
+        este_orden <- as.numeric(as.character(ref_tablas[dt_tabla,2]))
+        tabla_naval <- naval_tablas[[este_orden]]
+        este_titulo <- ref_tablas$Titulo[n]
+
+        titulo_armado <- paste0(nombre_hoja, " - ", este_titulo)        
+        
+        ft1 <- flextable(data = esta_tabla) %>% 
+          theme_booktabs() %>% 
+          autofit() 
+        
+        # Agregamos una hoja nueva
+        pptx_tablas <- add_slide(pptx_tablas, layout = "Title and Content", master = "Office Theme")
+        
+      #  pptx_tablas <- ph_with_text(x = pptx_tablas, type = "title", str = titulo_armado)
+        
+        pptx_tablas <- ph_with(x=pptx_tablas, location = ph_location_type(type = "title"),
+                               index = n, value = titulo_armado)
+        
+     #   pptx_tablas <-  ph_with_flextable(pptx_tablas, ft1, type = "body") 
+        
+        pptx_tablas <- ph_with(x=pptx_tablas, location = ph_location_type(type = "body"),
+                               index = n, value = ft1)
+        
+  } # Fin for n
+
+# SIBEN 2020
+# nombre_archivo <-  "002_Doc - Power - Tablas.pptx"
+  
+direccion_save_power <- paste0(direccion, "/", nombre_archivo_power)
+  print(pptx_tablas, target = direccion_save_power)
+  
+  
+  
+  
+  
+###  
+} # Fin tablas_internas a Power Point
+####################################################################
+}
+
+# tablas_internas a R
+if (1 == 2) {
+nombre_archivo <-  "003_Doc - R - Tablas.R"
+direccion_save <- paste0(direccion, "/", nombre_archivo)
+save(tablas_internas, file=direccion_save)
+cat("tablas_internas en R - Completado\n")
+}
+
+
+# remove(direccion, direccion_save_excel, direccion_save_power)
+remove(direccion, direccion_save_excel)

@@ -1,0 +1,108 @@
+
+# Creamos una funcion que cargue todas las bases de datos medicas originales
+# y solo devuelva las bases importadas, y algunos carteles de funcionamiento 
+# interno.
+
+LoadData_002 <- function(){
+  
+  # # # Script: 002_LoadData.R
+  # Lo que hace es cargar 3 bases de datos medicas, que son los pilares
+  # de todo el trabajo.
+  # Al final hay algunos retoques que se realizan sobre algunas columnas en 
+  # particular.
+  
+  # Detalles para la inportacion...
+  direccion_general_carga <- "../002_BasesOriginales"
+  archivos_carga <- c("001_Base_Original.xlsx", "002_Base_IPT.xlsx", "003_Base_IC.xlsx")
+  mensaje_armado <- "Archivo de Script General - 002_LoadData.R"
+
+  # Armamos una lista
+  BASES_ORIGINALES <- list()
+  
+  # Importamos las bases en el objeto "BASES_ORIGINALES"
+  for(k in 1:length(archivos_carga)) {
+    
+  
+  BASES_ORIGINALES[[k]] <- cargar_archivoUV(input_direccion = direccion_general_carga, 
+                                 input_pos_archivo = k, 
+                                 input_archivo_esperado = archivos_carga[k],
+                                 input_mensaje = mensaje_armado,
+                                 input_hoja = 1)
+  
+  } # Fin for k
+  
+  # Cada uno recibe el nombre del su archivo
+  names(BASES_ORIGINALES) <- archivos_carga
+#####################################################################  
+
+
+# # # Modificaciones minimas sobre la base de datos original
+# 1) Columna G
+esta_columna <- let2num("G")
+mini <- BASES_ORIGINALES[[1]][, esta_columna]
+
+for ( k in 1:length(mini)) if (!is.na(mini[k])) if (mini[k] == "-") mini[k] <- NA
+
+BASES_ORIGINALES[[1]][, esta_columna] <- mini
+
+remove(mini, esta_columna, k)
+##############      ##############      ##############      ##############      ##############
+
+
+
+# 2) Columna H
+esta_columna <- let2num("H")
+mini <- BASES_ORIGINALES[[1]][, esta_columna]
+
+for ( k in 1:length(mini)) if (!is.na(mini[k])) if (mini[k] == "-") mini[k] <- NA
+
+BASES_ORIGINALES[[1]][, esta_columna] <- mini
+
+
+remove(mini, esta_columna, k)
+##############      ##############      ##############      ##############      ##############
+
+
+# 3) Columna AC
+esta_columna <- let2num("AC")
+mini <- BASES_ORIGINALES[[1]][, esta_columna]
+
+for ( k in 1:length(mini)) if (!is.na(mini[k])) if (mini[k] == "Forceps") mini[k] <- "Vaginal"
+
+BASES_ORIGINALES[[1]][, esta_columna] <- mini
+
+
+remove(mini, esta_columna, k)
+##############      ##############      ##############      ##############      ##############
+
+
+
+
+###############################################################################################
+# 4) Controles de alineado
+
+# Control de alineado entre las bases de datos
+
+# El alineado es para verificar que los archivos poseen:
+# la misma cantidad de filas.
+
+
+# Control de alineado 1 de 2
+cat("Control de Alineacion 1 de 2: BASE_ORIGINAL y BASE_IPT\n")
+control_alineado(input_b1 = BASES_ORIGINALES[[1]], input_b2 = BASES_ORIGINALES[[2]])
+
+# Control de alineado 2 de 2
+cat("Control de Alineacion 2 de 2: BASE_ORIGINAL y BASE_IC\n")
+control_alineado(input_b1 = BASES_ORIGINALES[[1]], input_b2 = BASES_ORIGINALES[[3]])  
+
+
+################################################################################################
+# 5) Return
+
+return(BASES_ORIGINALES)
+
+}
+
+BASES_ORIGINALES <- LoadData_002()
+
+# Cargamos bases de referencia

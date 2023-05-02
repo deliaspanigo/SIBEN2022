@@ -1,0 +1,14 @@
+browsers<-read.table("browsers.txt",header=TRUE)
+browsers<-browsers[order(browsers[,2]),]
+pielabels <- sprintf("%s = %3.1f%s", browsers[,1],
+                     100*browsers[,2]/sum(browsers[,2]), "%")
+pie(browsers[,2],
+    labels=NA,
+    clockwise=TRUE,
+    col=brewer.pal(7,"Set1"),
+    border="white",
+    radius=0.7,
+    cex=0.8,
+    main="Percentage Share of Internet Browser usage")
+legend("bottomright",legend=pielabels,bty="n",
+       fill=brewer.pal(7,"Set1"))

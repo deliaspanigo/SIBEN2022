@@ -1,0 +1,24 @@
+
+
+#### libraries.R
+
+library(readxl)
+library(colourpicker)
+library(readxl)
+library(DT)
+library(datasets)
+library(Hmisc)
+library(fmsb)
+library(ggplot2)
+library(shinyjs)
+library(ggvis)
+library(sfsmisc) # errbar()
+library(gplots)
+library(agricolae)
+library(coin) # Mann-Whitney para Wilcoxon test
+
+library(readxl)
+# library(openxlsx)
+# library(xlsx)
+library(writexl)
+

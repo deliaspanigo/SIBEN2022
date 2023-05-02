@@ -1,0 +1,65 @@
+
+# Creamos una funcion que cargue todos las bases fijas y haga controles.
+# Esto implica:
+# - Unidades Hospitalarias
+# - Valores Fenton de Peso
+# - Valores Fenton de Perimetro Cefalico
+
+
+
+LoadArchivosFijos_005 <- function(){
+  
+  
+  # # # Script: 005_LoadArchivosFijos.R
+  # Creamos una funcion que cargue todos las bases fijas y haga controles.
+  # Esto implica:
+  # - Unidades Hospitalarias
+  # - Valores Fenton de Peso
+  # - Valores Fenton de Perimetro Cefalico
+  
+  
+  # Detalles para la importacion...
+  direccion_general_carga <- "../004_ArchivosFijos"
+  archivos_carga <- c("001_Unidades Hospitalarias.xlsx", "002_Fenton General.xlsx")
+  mensaje_armado <- "Archivo de Script General - 005_LoadArchivosFijos.R"
+  
+  # Armamos una lista
+  REJUNTE_BASES_FIJAS <- list()
+  
+    # 1) Unidades Hospitalarias
+    REJUNTE_BASES_FIJAS[[1]] <- cargar_archivoUV(input_direccion = direccion_general_carga, 
+                                              input_pos_archivo = 1, 
+                                              input_archivo_esperado = archivos_carga[1],
+                                              input_mensaje = mensaje_armado,
+                                              input_hoja = 1)
+    
+  
+    
+    # 2) Valores Fenton Peso
+    REJUNTE_BASES_FIJAS[[2]] <- cargar_archivoUV(input_direccion = direccion_general_carga, 
+                                                 input_pos_archivo = 2, 
+                                                 input_archivo_esperado = archivos_carga[2],
+                                                 input_mensaje = mensaje_armado,
+                                                 input_hoja = 1)
+  
+    
+    
+    # 3) Valoes Fenton Cefalico
+    REJUNTE_BASES_FIJAS[[2]] <- cargar_archivoUV(input_direccion = direccion_general_carga, 
+                                                 input_pos_archivo = 2, 
+                                                 input_archivo_esperado = archivos_carga[2],
+                                                 input_mensaje = mensaje_armado,
+                                                 input_hoja = 2)
+    
+  
+  
+}
+
+# Los captamos, y las separamos...
+REJUNTE_BASES_FIJAS <- LoadArchivosFijos_005()
+
+BASE_ref_unidades_hospitalarias <- REJUNTE_BASES_FIJAS[[1]]
+BASE_ref_Fenton_Peso  <- REJUNTE_BASES_FIJAS[[2]]
+BASE_ref_Fenton_PC  <- REJUNTE_BASES_FIJAS[[3]]
+
+remove(REJUNTE_BASES_FIJAS)

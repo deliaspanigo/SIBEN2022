@@ -1,0 +1,54 @@
+
+
+
+# Cargamos herramientas
+# source("../004_Ejecucion/004_Ejecucion General.R")
+
+
+VR <- mini[,1]
+FACTOR <- mini[,2]
+
+cantidad <- tapply(VR, FACTOR, length)
+
+
+estas_si <- c(3, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 17, 18, 19, 20, 21, 23, 24, 26, 
+         27, 28, 29, 30, 31, 33, 35)
+
+
+
+dt_estas_unidades <- rep(F, length(FACTOR))
+
+
+for (k in 1:length(estas_si)) {
+  
+  dt_si <- estas_si[k] == FACTOR
+  dt_estas_unidades[dt_si] <- T
+  remove(dt_si)
+}
+
+
+VR2 <- VR[dt_estas_unidades]
+FACTOR2 <- FACTOR[dt_estas_unidades]
+
+
+minimos <- tapply(VR2, FACTOR2, min)
+medianas <- tapply(VR2, FACTOR2, median)
+maximos <- tapply(VR2, FACTOR2, max)
+cantidad <- tapply(VR2, FACTOR2, length)
+
+tabla_armada <- rbind(minimos, medianas, maximos, cantidad)
+rownames(tabla_armada) <- c("Mínimo", "Mediana", "Máximo", "Catidad de datos")
+# tabla_armada <- as.data.frame(tabla_armada)
+
+# mis_nombres <- t(as.data.frame(colnames(tabla_armada)))
+
+mi_grafico <- '
+boxplot(VR2 ~ FACTOR2, las=2, ylab=colnames(mini)[1], xlab=colnames(mini)[2], 
+        range = 0, col = "red", main = titulo_grafico, ylim=c(min(VR), 250))
+'
+
+tabla_salida <- list(tabla_armada)
+names(tabla_salida) <- "Tabla de Medidas Resumen"
+
+
+# eval(parse(text= mi_grafico))

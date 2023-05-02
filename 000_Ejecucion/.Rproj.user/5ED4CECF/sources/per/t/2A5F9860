@@ -1,0 +1,26 @@
+{
+    "id": "2A5F9860",
+    "path": "C:/DesarrollosGitHub/SIBEN2021/011_Tablas/002_ScriptTablas_General/011_Tablas - 004_GuardarTablas.R",
+    "project_path": null,
+    "type": "r_source",
+    "hash": "1549137286",
+    "contents": "",
+    "dirty": false,
+    "created": 1655482492926.0,
+    "source_on_save": false,
+    "relative_order": 5,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "302,4",
+        "scrollLine": "0"
+    },
+    "folds": "9|60|14|0|\n16|57|20|0|\n42|1|186|0|\n360|1|428|0|\n",
+    "lastKnownWriteTime": 1655493305,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1655493305414,
+    "read_only": false,
+    "read_only_alternatives": []
+}

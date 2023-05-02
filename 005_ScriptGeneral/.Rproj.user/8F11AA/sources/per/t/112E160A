@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1612974181432.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "5|30|44|0|\n",
+    "hash" : "3668038697",
+    "id" : "112E160A",
+    "lastKnownWriteTime" : 1613679301,
+    "last_content_update" : 1613681598505,
+    "path" : "~/Wait in Vain/2020/002_TRABAJOS/001_Siben/001_2020/001_1raVersion/005_ScriptGeneral/003_LoadNiveles.R",
+    "project_path" : "003_LoadNiveles.R",
+    "properties" : {
+        "cursorPosition" : "33,2",
+        "scrollLine" : "25",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

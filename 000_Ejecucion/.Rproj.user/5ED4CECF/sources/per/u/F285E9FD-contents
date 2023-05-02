@@ -1,0 +1,40 @@
+
+# library(writexl)
+library(xlsx)
+# write_xlsx(df,'filename.xlsx')
+
+tabla_para_guardar <- mtcars
+tabla_para_guardar
+
+df <- tabla_para_guardar
+df <- as.data.frame(df)
+
+# Encoding(tabla_para_guardar) <- "UTF-8"
+
+nombre_archivo_excel <- paste0("001_Doc - Excel - Tablas - ", modificacion01, " - ", modificacion02, ".xlsx")
+nombre_hoja <- paste0("Tabla", 10)
+
+
+# create a new workbook for outputs
+# possible values for type are : "xls" and "xlsx"
+wb_tablas <- xlsx::createWorkbook(type="xlsx")
+
+#++++++++++++++++++++++++++++++++++++
+sheet <- xlsx::createSheet(wb_tablas, sheetName = nombre_hoja)
+
+# Creamos la Hoja
+# xlsx::addWorksheet(wb = wb_tablas, sheetName = nombre_hoja)
+
+
+xlsx::addDataFrame(df, sheet, startRow=4, startColumn=4)
+# 
+# xlsx::writeData(wb_tablas, nombre_hoja, tabla_para_guardar, startRow = fila_inicio03, 
+#                     startCol = columna_inicio03, rowNames = T, colNames = T)
+
+
+direccion_save_excel <- paste0("C:/Users/Usuario/Desktop/PRUEBA/", nombre_archivo_excel)
+#saveWorkbook(wb_tablas, direccion_save)
+xlsx::saveWorkbook(wb_tablas, "r-xlsx-report-example.xlsx")
+
+
+

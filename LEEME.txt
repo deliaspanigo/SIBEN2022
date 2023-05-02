@@ -1,0 +1,27 @@
+
+Hola!
+
+Para usar este codigo, tenes que ir a la carpeta "000_Ejecucion".
+Ahi esta el proyecto de RStudio para hacer correr todo.
+
+1) Las bases de datos se colocan en Excel manualmente, y las pasas manualmente vos a CSV UTF-8 (no el clasico CSV).
+2) Las bases tienen un nombre particular cada una. Si no te acordas, mira las versiones anteriores de la base de datos.
+3) Trabajo guarda todas las versiones de todas las cosas qeu haces.
+
+4) Al abrir el proyecto de RStudio de la carpeta "000_Ejecucion" lo primero que tenes que hacer es generar
+   una base de datos recategorizados de nuevo. Tenes que hacer correr el script "000_EjecucionEspecial - Crear Base Recat.R".
+   La nueva base recategorizada en realidad toma la anterior, y le agrega los niveles del factor que le falten en cada variable.
+   Los agrega en tal caso al final. No quita niveles, solo los agrega al final.
+
+5) Despues de eso... Borras el entorno de trabajo, y abris el codigo que esa en "000_EjecucionGeneral.R", y ahi le das
+   play a todo o lo haces paso a paso.
+
+6) Lo que nunca andubo bien es el copiado de los archivos de la carpeta "015_EstadisticasSIBEN" a la 
+   carpeta "016_EntregasSiben". Entonces la carpeta de las tablas y graficos la tenes que copiar y pegar a mano.
+
+
+Abrazo chanta!!!
+Play a todo!
+Vos podes siempre!
+Se feliz!
+David - 02/05/2023 - UniTrento - Povo - Italia

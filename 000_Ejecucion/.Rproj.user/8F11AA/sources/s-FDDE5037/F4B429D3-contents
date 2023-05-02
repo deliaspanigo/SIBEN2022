@@ -1,0 +1,105 @@
+
+
+
+# David en el informe original el gráfico 53 es Indice Infección tardía por catéter
+# 
+# Este se saca de Infección Tardía CONFIRMADA TABLAS GG, GR, HC, HN, HY siempre tiene que ser confirmada
+# 
+
+# De las siguientes columnas, solo los CONFIRMADOS...
+
+
+col_ipt1 <- c("W", "AH", "AS", "BD", "BO", "BZ", "CK", "CV", "DG", "DR")  
+col_ipt2 <- c("CI", "CK")
+col_ipt3 <- "E"
+
+estas_columnas <- let2num(col_ipt1)
+
+v1 <- BASE_MOD_IPT[let2num(col_ipt1)]
+dias_cateter <- BASE_MOD_ORIGINAL[let2num(col_ipt2)]
+unidad_hospitalaria <- BASE_MOD_RECAT[let2num(c(col_ipt3))]
+
+
+######################################################################
+
+
+
+
+
+# Base de COnfirmaciones
+for(k in 1:ncol(v1)) v1[,k] <- as.character(v1[,k])
+for (k in 1:nrow(v1)) {
+  for (y in 1:ncol(v1)) {
+    
+    if (is.na(v1[k, y])) v1[k, y] <- 0 
+    if (v1[k, y] == "Confirmada") v1[k, y] <- 1 else v1[k, y] <- 0 
+    
+  }
+}
+for(k in 1:ncol(v1)) v1[,k] <- as.numeric(as.character(v1[,k]))
+
+# Cantidad de confirmaciones por paciente
+confirmaciones_paciente <- rowSums(v1)
+
+
+
+
+# Creamos minibase
+mini <- cbind(confirmaciones_paciente, unidad_hospitalaria, dias_cateter)
+
+# # Filtromso... solo los "Confirmados de la columna (W) de IPT
+# dt_filtro <-  BASE_IPT[let2num("W")] == "Confirmada"
+# dt_filtro[is.na(dt_filtro)] <- FALSE
+# 
+# mini2 <- mini[dt_filtro, ]
+
+mini2 <- mini
+
+
+# Por cada Unidad habra una media
+estas_unidades <- names(table(unidad_hospitalaria))
+medias_unidad <- rep(NA, length(estas_unidades))
+
+
+for (k in 1:length(medias_unidad)) {
+  
+  dt_filtro2 <- mini2$recat_codigo_unidad == estas_unidades[k]
+  
+  mini3 <- mini2[dt_filtro2, ]
+  
+  suma1 <- sum(na.omit(mini3$confirmaciones_paciente)) # Suma de Confirmaciones
+  
+  suma2_1 <- sum(na.omit(mini3$Cateter.centr.insic.perif.dias)) # Dias de Cateteres1
+  suma2_2 <- sum(na.omit(mini3$Cateter.venoso.central.dias)) # Dias de Cateteres2
+  
+  # Hago una correcion... por que las celdas vacias de "dias de cateteres" son el realidad un cero.
+  # por que cuando el paciente no tuvo cateteres, le no calculo dias de cateteres.
+  if (is.na(suma2_1)) suma2_1 <- 0
+  if (is.na(suma2_2)) suma2_2 <- 0
+  
+  suma2 <- sum(suma2_1, suma2_2) # suma de dias de cateteres
+  resultado <- (suma1/suma2)*1000
+  
+  resultado2 <- round2(resultado, 0)
+  
+  medias_unidad[k] <- resultado2
+  
+  
+}
+
+names(medias_unidad) <- estas_unidades
+
+nuevo_orden <- order(medias_unidad, decreasing = T)
+medias_unidad <- medias_unidad[nuevo_orden]
+
+tabla_salida <- list(medias_unidad)
+names(tabla_salida) <- "Tabla de Indice"
+
+mi_grafico <- '
+valores_x <- barplot(medias_unidad, col="red", las=2, ylim=c(0, 80), main=titulo_grafico,
+                     xlab="Código Unidades", ylab="Índice")
+
+text(valores_x, medias_unidad + 5, medias_unidad)
+'
+
+# eval(parse(text= mi_grafico))

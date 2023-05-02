@@ -1,0 +1,49 @@
+
+# Creamos una funcion que cargue todos los niveles de todas
+# las bases de datos medicas originales, y solo devuelve eso y algunos carteles de funcionamiento 
+# interno.
+
+LoadNiveles_003 <- function(){
+  
+  # # # Script: 003_LoadNiveles.R
+  # # # Se importaran las bases en donde se encuentran solo los niveles de 
+  # # # cada una de las variables de cada base de datos medica original.
+  
+  # Detalles para la inportacion...
+  direccion_general_carga <- "../003_BasesNiveles"
+  archivos_carga <- c("001_BE_Niveles Base Original.xlsx", "002_BE_Niveles IPT.xlsx", "003_BE_Niveles IC.xlsx")
+  mensaje_armado <- "Archivo de Script General - 003_LoadNiveles.R"
+  
+  # Armamos una lista
+  BASES_NIVELES_ORIGINALES <- list()
+  
+  
+  # Importamos las bases en el objeto "BASES_NIVELES_ORIGINALES"
+  for(k in 1:length(archivos_carga)) {
+    
+    
+    BASES_NIVELES_ORIGINALES[[k]] <- cargar_archivoUV(input_direccion = direccion_general_carga, 
+                                                      input_pos_archivo = k, 
+                                                      input_archivo_esperado = archivos_carga[k],
+                                                      input_mensaje = mensaje_armado,
+                                                      input_hoja = 1)
+    
+  } # Fin for k
+  
+  
+  
+  
+  # Cada uno recibe el nombre del su archivo
+  names(BASES_NIVELES_ORIGINALES) <- archivos_carga
+  
+  
+  # Damos salida a los archivos importados...
+  return(BASES_NIVELES_ORIGINALES)
+  
+  
+  
+}
+
+BASES_NIVELES_ORIGINALES <- LoadNiveles_003()
+
+# Cargamos bases de referencia

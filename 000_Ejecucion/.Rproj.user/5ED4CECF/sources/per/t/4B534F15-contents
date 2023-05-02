@@ -1,0 +1,33 @@
+
+
+
+tabla_para_guardar <- tabla_salida[[1]]
+tabla_para_guardar
+
+tabla_para_guardar <- enc2utf8(tabla_para_guardar)
+
+# Encoding(tabla_para_guardar) <- "UTF-8"
+
+nombre_archivo_excel <- paste0("001_Doc - Excel - Tablas - ", modificacion01, " - ", modificacion02, ".xlsx")
+nombre_hoja <- paste0("Tabla", 10)
+
+
+
+
+# Workbook de Tablas (Creamos el Excel)
+wb_tablas <- openxlsx::createWorkbook()
+
+# Creamos la Hoja
+openxlsx::addWorksheet(wb = wb_tablas, sheetName = nombre_hoja)
+
+
+openxlsx::writeData(wb_tablas, nombre_hoja, tabla_para_guardar, startRow = fila_inicio03, 
+                    startCol = columna_inicio03, rowNames = T, colNames = T)
+
+
+direccion_save_excel <- paste0("C:/Users/Usuario/Desktop/PRUEBA/", nombre_archivo_excel)
+#saveWorkbook(wb_tablas, direccion_save)
+openxlsx::saveWorkbook(wb_tablas, direccion_save_excel, overwrite = T)
+
+
+

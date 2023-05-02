@@ -1,0 +1,40 @@
+
+
+# Generacion de Graficos para todos
+{
+  ###
+  
+  for (llave_creadora1 in 1:length(names(MegaBase))) {
+    for (llave_creadora2 in 1:length(names(MegaBase[[llave_creadora1]]))) {
+      
+      # Bases de Datos
+      BASE_MOD_ORIGINAL <- MegaBase[[llave_creadora1]][[llave_creadora2]]$BASE_MOD_ORIGINAL
+      BASE_MOD_IPT <- MegaBase[[llave_creadora1]][[llave_creadora2]]$BASE_MOD_IPT
+      BASE_MOD_IC <- MegaBase[[llave_creadora1]][[llave_creadora2]]$BASE_MOD_IC
+      BASE_MOD_RECAT <- MegaBase[[llave_creadora1]][[llave_creadora2]]$BASE_MOD_RECAT
+      
+      
+      esquirla1 <- names(MegaBase)[llave_creadora1]
+      esquirla2 <- names(MegaBase[[llave_creadora1]])[llave_creadora2]
+      esquirla3 <- "002_Graficos"
+      
+      mi_mega_directorio <- paste0(dir_001, "/", esquirla1, "/", esquirla2 , "/", esquirla3)
+      mi_mega_carpetita_grafica <- paste0(mi_mega_directorio , "/", "003_Graficos_Individuales")
+      
+      
+      source("../012_Graficos/002_ScriptGraficos_General/012_Graficos - 001_Objetos Iniciales.R")
+      
+      
+      source("../012_Graficos/002_ScriptGraficos_General/012_Graficos - 003_Minibases Graficos.R")
+      
+      
+      source("../012_Graficos/002_ScriptGraficos_General/012_Graficos - 004_Crear y Guardar Graficos.R")
+      
+      #     remove(BASE_MOD_ORIGINAL, BASE_MOD_IPT, BASE_MOD_IC, BASE_MOD_Recategorizada)
+      
+    } # Fin llave2
+  } # Fin llave1
+  
+  ###  
+} # Fin Tablas para todos
+###########################################################################

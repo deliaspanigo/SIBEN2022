@@ -1,0 +1,45 @@
+
+# Creamos una funcion que cargue todos las bases de referencia
+# que tenemos para la resolucion de tablas y graficos
+
+
+
+LoadArchivosRef_006 <- function(){
+  
+  
+  # Tenemos un mensaje de referencia...
+  mensaje_armado <- "Carga de Referencia para Tablas - 006_LoadArchivosRef"
+
+  
+  # Cargamos tablas...
+  ref_Tablas <- cargar_archivoUV(input_direccion = "../011_ScriptTablas/001_ModelosTablas", 
+                                 input_pos_archivo = NULL, 
+                                 input_archivo_esperado = "000_Tablas y Minibases.xlsx",
+                                 input_mensaje = mensaje_armado,
+                                 input_hoja = 1)
+  
+  # Cargamos graficos...
+  ref_Graficos <- cargar_archivoUV(input_direccion = "../012_ScriptGraficos/001_ModelosGraficos", 
+                                 input_pos_archivo = NULL, 
+                                 input_archivo_esperado = "000_Graficos y Minibases.xlsx",
+                                 input_mensaje = mensaje_armado,
+                                 input_hoja = 1)
+  
+  # Juntamos todos en un combinadito...
+  combinadito <- list(ref_Tablas, ref_Graficos)
+  
+  
+  # Sale el combinadito...
+  return(combinadito)
+  
+  
+  
+  
+}
+
+# Los captamos, y las separamos...
+combinadito <- LoadArchivosRef_006()
+ref_Tablas <- combinadito[[1]]
+ref_Graficos <- combinadito[[2]]
+
+remove(combinadito)
